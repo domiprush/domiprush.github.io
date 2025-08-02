@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N8N Automatizáció - Pécs | Étterem & Ingatlan Automatizálás</title>
+    <meta name="description" content="Professzionális n8n automatizációs szolgáltatások Pécsen. Éttermek és ingatlanirodák részére. Spórolj időt és pénzt intelligens automatizálással.">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+        }
+
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section.hidden {
+            display: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 6rem 0;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .cta-button {
+            background: #ff6b6b;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        /* Services Section */
+        .services {
+            background: #f8f9fa;
+        }
+
+        .services h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: #333;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .service-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .service-card ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .service-card ul li {
+            margin: 0.5rem 0;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .service-card ul li:before {
+            content: "✓";
+            color: #4CAF50;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Reference Section */
+        .reference {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .reference h2 {
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+
+        .testimonial {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem auto;
+            max-width: 800px;
+            backdrop-filter: blur(10px);
+        }
+
+        .testimonial blockquote {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial cite {
+            font-weight: bold;
+        }
+
+        .results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .result-item {
+            text-align: center;
+        }
+
+        .result-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #FFE082;
+        }
+
+        .result-text {
+            font-size: 1.1rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: #f8f9fa;
+        }
+
+        .contact h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: #333;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .contact-info {
+            padding: 2rem;
+        }
+
+        .contact-info h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .benefits {
+            margin-top: 2rem;
+        }
+
+        .benefits ul {
+            list-style: none;
+        }
+
+        .benefits ul li {
+            margin: 0.8rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .benefits ul li:before {
+            content: "🚀";
+            position: absolute;
+            left: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #667eea;
+                padding: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .results {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">N8N Automatizáció</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" onclick="showSection('home')">Főoldal</a></li>
+                <li><a href="#" onclick="showSection('services')">Szolgáltatások</a></li>
+                <li><a href="#" onclick="showSection('reference')">Referencia</a></li>
+                <li><a href="#" onclick="showSection('contact')">Kapcsolat</a></li>
+            </ul>
+            <div class="mobile-menu" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="section">
+            <div class="hero">
+                <div class="container">
+                    <h1>Automatizáld vállalkozásod 🚀</h1>
+                    <p>Professzionális n8n automatizációs szolgáltatások Pécsen és környékén.<br>
+                    Spórolj időt, pénzt és energiát intelligens munkafolyamatokkal!</p>
+                    <a href="#" onclick="showSection('contact')" class="cta-button">Ingyenes konzultáció</a>
+                </div>
+            </div>
+
+            <div class="section" style="background: white;">
+                <div class="container">
+                    <h2 style="text-align: center; margin-bottom: 3rem; color: #333;">Miért válassz minket?</h2>
+                    <div class="services-grid" style="grid-template-columns: repeat(3, 1fr);">
+                        <div class="service-card">
+                            <h3>⚡ Gyors megoldások</h3>
+                            <p>Tapasztalt n8n szakértőként gyorsan azonosítom és megoldom az automatizálható folyamatokat.</p>
+                        </div>
+                        <div class="service-card">
+                            <h3>💰 Költséghatékony</h3>
+                            <p>Az automatizáció már rövid távon megtérül a megtakarított idővel és csökkent hibaarányokkal.</p>
+                        </div>
+                        <div class="service-card">
+                            <h3>🎯 Helyi szakértelem</h3>
+                            <p>Pécsi vállalkozásként ismerem a helyi cégek igényeit és kihívásait.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="section services hidden">
+            <div class="container">
+                <h2>Szolgáltatásaink</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>🍽️ Étterem Automatizáció</h3>
+                        <ul>
+                            <li>Foglalási rendszer automatizálása</li>
+                            <li>Rendeléskezelés optimalizálása</li>
+                            <li>Készletkövetés automatizálása</li>
+                            <li>Ügyfél-értesítések automata küldése</li>
+                            <li>Közösségi média posztok ütemezése</li>
+                            <li>Számla és bizonylat kezelés</li>
+                        </ul>
+                        <p><strong>Eredmény:</strong> 10-15 óra megtakarítás hetente!</p>
+                    </div>
+
+                    <div class="service-card">
+                        <h3>🏠 Ingatlan Automatizáció</h3>
+                        <ul>
+                            <li>Lead management automatizálása</li>
+                            <li>Ingatlan hirdetések szinkronizálása</li>
+                            <li>Ügyfél-kommunikáció automatizálása</li>
+                            <li>Dokumentumok automatikus generálása</li>
+                            <li>CRM rendszer integrációk</li>
+                            <li>Jelentések automatikus készítése</li>
+                        </ul>
+                        <p><strong>Eredmény:</strong> 20+ óra megtakarítás hetente!</p>
+                    </div>
+
+                    <div class="service-card">
+                        <h3>⚙️ Egyedi Automatizációk</h3>
+                        <ul>
+                            <li>Testreszabott munkafolyamatok</li>
+                            <li>API integrációk</li>
+                            <li>Adatszinkronizáció rendszerek között</li>
+                            <li>Email marketing automatizálás</li>
+                            <li>Riportolás és adatelemzés</li>
+                            <li>Folyamatos támogatás és karbantartás</li>
+                        </ul>
+                        <p><strong>Eredmény:</strong> Személyre szabott hatékonyság!</p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 3rem;">
+                    <a href="#" onclick="showSection('contact')" class="cta-button">Kérj ajánlatot most!</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reference Section -->
+        <section id="reference" class="section reference hidden">
+            <div class="container">
+                <h2>Sikertörténet: Xavér Étterem</h2>
+                
+                <div class="testimonial">
+                    <blockquote>
+                        "Az n8n automatizáció teljesen megváltoztatta a működésünket. A korábbi adminisztrációs feladatok most automatikusan mennek, és sokkal több időnk van a vendégekre koncentrálni."
+                    </blockquote>
+                    <cite>- Xavér Étterem vezetősége</cite>
+                </div>
+
+                <div class="results">
+                    <div class="result-item">
+                        <div class="result-number">15+</div>
+                        <div class="result-text">Megtakarított óra hetente</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-number">90%</div>
+                        <div class="result-text">Csökkent hibaarány</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-number">3x</div>
+                        <div class="result-text">Gyorsabb rendeléskezelés</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-number">100%</div>
+                        <div class="result-text">Elégedett ügyfél</div>
+                    </div>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 10px; margin-top: 3rem;">
+                    <h3 style="margin-bottom: 1rem;">Mit automatizáltunk a Xavér Étteremnél?</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; text-align: left;">
+                        <div>
+                            <strong>📱 Foglalási rendszer:</strong><br>
+                            Automatikus visszaigazolások és emlékeztetők
+                        </div>
+                        <div>
+                            <strong>📊 Készletkövetés:</strong><br>
+                            Valós idejű készletfrissítés és riasztások
+                        </div>
+                        <div>
+                            <strong>💌 Ügyfél-kommunikáció:</strong><br>
+                            Személyre szabott üzenetek és ajánlatok
+                        </div>
+                        <div>
+                            <strong>📈 Jelentések:</strong><br>
+                            Automatikus napi/heti/havi riportok
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 3rem;">
+                    <a href="#" onclick="showSection('contact')" class="cta-button">Te is szeretnél ilyen eredményeket?</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section contact hidden">
+            <div class="container">
+                <h2>Ingyenes konzultáció</h2>
+                <div class="contact-content">
+                    <div class="contact-form">
+                        <h3 style="margin-bottom: 1rem; color: #667eea;">Kezdjük el együtt!</h3>
+                        <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                            <div class="form-group">
+                                <label for="name">Név *</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email cím *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Telefonszám</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="business">Vállalkozás típusa *</label>
+                                <select id="business" name="business" required>
+                                    <option value="">Válassz...</option>
+                                    <option value="etterem">Étterem / Vendéglátás</option>
+                                    <option value="ingatlan">Ingatlaniroda</option>
+                                    <option value="egyeb">Egyéb</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="challenge">Milyen ismétlődő feladataid vannak? *</label>
+                                <textarea id="challenge" name="challenge" rows="4" required placeholder="Pl. foglalások kezelése, rendelések feldolgozása, ügyféladatok frissítése..."></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="time">Mennyi időt töltenél ezekkel naponta?</label>
+                                <select id="time" name="time">
+                                    <option value="">Válassz...</option>
+                                    <option value="1-2">1-2 óra</option>
+                                    <option value="3-4">3-4 óra</option>
+                                    <option value="5+">5+ óra</option>
+                                </select>
+                            </div>
+                            
+                            <button type="submit" class="cta-button" style="width: 100%;">Ingyenes konzultáció kérése</button>
+                        </form>
+                    </div>
+
+                    <div class="contact-info">
+                        <h3>Miért kérj ingyenes konzultációt?</h3>
+                        <div class="benefits">
+                            <ul>
+                                <li>30 perces személyes egyeztetés</li>
+                                <li>Konkrét automatizációs javaslatok</li>
+                                <li>Időmegtakarítás kalkuláció</li>
+                                <li>Beruházás megtérülési számítás</li>
+                                <li>Semmi kötelezettség</li>
+                            </ul>
+                        </div>
+
+                        <h3 style="margin-top: 2rem;">Elérhetőségek</h3>
+                        <p>📍 <strong>Székhely:</strong> Pécs</p>
+                        <p>📧 <strong>Email:</strong> info@n8nautomatizacio.hu</p>
+                        <p>📱 <strong>Telefon:</strong> +36 XX XXX XXXX</p>
+                        <p>⏰ <strong>Rendelkezésre állás:</strong> H-P 9:00-18:00</p>
+
+                        <div style="background: #f0f8ff; padding: 1.5rem; border-radius: 8px; margin-top: 2rem;">
+                            <strong>💡 Gyors válasz garancia:</strong><br>
+                            24 órán belül válaszolunk minden megkeresésre!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 N8N Automatizáció. Minden jog fenntartva. | Pécs, Magyarország</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Professzionális automatizációs szolgáltatások éttermek és ingatlanirodák számára</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        function showSection(sectionName) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Show selected section
+            const selectedSection = document.getElementById(sectionName);
+            if (selectedSection) {
+                selectedSection.classList.remove('hidden');
+            }
+            
+            // Close mobile menu if open
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.remove('active');
+        }
+
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Basic form validation
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const business = document.getElementById('business').value;
+            const challenge = document.getElementById('challenge').value;
+            
+            if (!name || !email || !business || !challenge) {
+                alert('Kérlek töltsd ki a kötelező mezőket!');
+                return;
+            }
+            
+            // Here you would normally send the form data
+            // For now, just show a success message
+            alert('Köszönjük a megkeresést! 24 órán belül felvesszük veled a kapcsolatot.');
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Smooth scrolling and animations
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(102, 126, 234, 0.95)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            }
+        });
+
+        // Initialize - show home section by default
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('home');
+        });
+    </script>
+</body>
+</html>
